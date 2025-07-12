@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contacto - Marco Roure</title>
+  <link rel="stylesheet" href="styles.css" />
+  <!-- Google Fonts Montserrat -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <header>
+    <h1>Marco Roure</h1>
+    <p>Fotografía Profesional</p>
+  </header>
+
+  <nav class="navbar">
+    <ul class="nav-links">
+      <li><a href="index.html">Galeria</a></li>
+      <li><a href="sobremi.html">Sobre mí</a></li>
+      <li><a href="contacto.html" class="active">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <main class="contenedor-contacto">
+    <h2>Contacto</h2>
+    <p>¿Tenés alguna consulta o querés contactar conmigo? Completá el siguiente formulario:</p>
+
+    <form id="formulario-contacto">
+      <input type="text" name="nombre" placeholder="Tu nombre" required />
+      <input type="email" name="email" placeholder="Tu correo electrónico" required />
+      <textarea name="mensaje" rows="5" placeholder="Tu mensaje..." required></textarea>
+      <button type="submit">Enviar mensaje</button>
+    </form>
+
+    <div id="mensaje-exito" class="mensaje-exito oculto">
+      ¡Gracias por tu mensaje! Te responderé a la brevedad.
+    </div>
+
+    <div class="botones-sociales">
+      <a href="https://wa.me/5493513922430" target="_blank" class="btn whatsapp">Enviar WhatsApp</a>
+      <a href="https://www.instagram.com/marcoroure_/" target="_blank" class="btn instagram">Visita mi Instagram</a>
+    </div>
+  </main>
+
+  <script>
+    const formulario = document.getElementById('formulario-contacto');
+    const mensajeExito = document.getElementById('mensaje-exito');
+
+    formulario.addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const datos = new FormData(formulario);
+
+      try {
+        const respuesta = await fetch("https://formspree.io/f/xeokygqo", {
+          method: "POST",
+          body: datos,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+
+        if (respuesta.ok) {
+          formulario.reset();
+          mensajeExito.classList.remove('oculto');
+          setTimeout(() => {
+            mensajeExito.classList.add('oculto');
+          }, 5000);
+        } else {
+          alert("Ocurrió un error al enviar el mensaje. Por favor, intentá más tarde.");
+        }
+      } catch (error) {
+        alert("No se pudo enviar el mensaje. Verificá tu conexión.");
+      }
+    });
+  </script>
+
+  <footer>
+    <p>&copy; 2025 Marco Roure - Todos los derechos reservados</p>
+  </footer>
+</body>
+</html>
