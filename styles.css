@@ -9,7 +9,7 @@
 html, body {
   height: 100%;
   font-family: 'Montserrat', sans-serif;
-  background-color: #f9f9f9;
+  background-color: #242323;
   color: #333;
   line-height: 1.6;
   display: flex;
@@ -19,7 +19,7 @@ html, body {
 
 /* === Header (uniforme para todas las páginas) === */
 header {
-  background-color: black;
+  background-color: #242323;
   color: #ece5e5;
   text-align: center;
   padding: 1.5rem 1rem;
@@ -41,7 +41,7 @@ header p {
 
 /* === Navbar === */
 .navbar {
-  background-color: black;
+  background-color: #242323;
   padding: 1rem 0.5rem; /* Ajuste opcional para mejor visual en mobile */
   position: sticky;
   top: 0;
