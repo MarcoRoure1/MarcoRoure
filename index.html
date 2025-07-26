@@ -29,14 +29,14 @@
     <div class="photo"><img src="fotos/DSC_0618.jpg" alt="Foto 2" /></div>
     <div class="photo"><img src="fotos/DSC_7459.jpg" alt="Foto 3" /></div>
     <div class="photo"><img src="fotos/DSC_7561.jpg" alt="Foto 4" /></div>
-    <div class="photo"><img src="fotos/DSC_5304.jpg" alt="Foto 5" /></div>
+    <div class="photo"><img src="fotos/DSC_5714.jpg" alt="Foto 5" /></div>
     <div class="photo"><img src="fotos/DSC_0728-2.jpg" alt="Foto 6" /></div>
     <div class="photo"><img src="fotos/DSC_7471.jpg" alt="Foto 7" /></div>
     <div class="photo"><img src="fotos/DSC_0383.jpg" alt="Foto 8" /></div>
     <div class="photo"><img src="fotos/DSC_0137.jpg" alt="Foto 9" /></div>
     <div class="photo"><img src="fotos/DSC_9901.jpg" alt="Foto 10" /></div>
     <div class="photo"><img src="fotos/DSC_9543.jpg" alt="Foto 11" /></div>
-    <div class="photo"><img src="fotos/DSC_5714.jpg" alt="Foto 12" /></div>
+    <div class="photo"><img src="fotos/DSC_5304.jpg" alt="Foto 12" /></div>
     <div class="photo"><img src="fotos/DSC_9582.jpg" alt="Foto 13" /></div>
     <div class="photo"><img src="fotos/DSC_9724.jpg" alt="Foto 14" /></div>
     <div class="photo"><img src="fotos/DSC_6976.jpg" alt="Foto 15" /></div>
@@ -46,35 +46,73 @@
   <footer>
     <p>&copy; 2025 Marco Roure - Todos los derechos reservados</p>
   </footer>
-  <!-- Lightbox (al final del body, antes del cierre de </body>) -->
+ <!-- Lightbox con navegación -->
 <div id="lightbox" class="lightbox">
   <span class="cerrar">&times;</span>
+  <span class="anterior">&#10094;</span>
   <img class="lightbox-img" src="" alt="Imagen ampliada">
+  <span class="siguiente">&#10095;</span>
 </div>
 <script>
-  // Seleccionar elementos
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = document.querySelector('.lightbox-img');
   const cerrar = document.querySelector('.cerrar');
+  const anterior = document.querySelector('.anterior');
+  const siguiente = document.querySelector('.siguiente');
+  const imagenes = document.querySelectorAll('.photo img');
 
-  // Añadir evento a cada imagen
-  document.querySelectorAll('.photo img').forEach(img => {
+  let indiceActual = 0;
+
+  // Función para mostrar imagen por índice
+  function mostrarImagen(index) {
+    if (index < 0) index = imagenes.length - 1;
+    if (index >= imagenes.length) index = 0;
+    indiceActual = index;
+    lightboxImg.src = imagenes[indiceActual].src;
+    lightboxImg.alt = imagenes[indiceActual].alt;
+  }
+
+  // Evento click para abrir el lightbox
+  imagenes.forEach((img, index) => {
     img.addEventListener('click', () => {
       lightbox.style.display = 'flex';
-      lightboxImg.src = img.src;
-      lightboxImg.alt = img.alt;
+      mostrarImagen(index);
     });
   });
 
-  // Cerrar lightbox al hacer clic en la X
+  // Cerrar lightbox
   cerrar.addEventListener('click', () => {
     lightbox.style.display = 'none';
   });
 
-  // Cerrar lightbox al hacer clic fuera de la imagen
+  // Click fuera de la imagen
   lightbox.addEventListener('click', (e) => {
     if (e.target === lightbox) {
       lightbox.style.display = 'none';
+    }
+  });
+
+  // Navegar izquierda / derecha
+  anterior.addEventListener('click', (e) => {
+    e.stopPropagation(); // Evita que cierre el lightbox
+    mostrarImagen(indiceActual - 1);
+  });
+
+  siguiente.addEventListener('click', (e) => {
+    e.stopPropagation();
+    mostrarImagen(indiceActual + 1);
+  });
+
+  // Flechas del teclado
+  document.addEventListener('keydown', (e) => {
+    if (lightbox.style.display === 'flex') {
+      if (e.key === 'ArrowLeft') {
+        mostrarImagen(indiceActual - 1);
+      } else if (e.key === 'ArrowRight') {
+        mostrarImagen(indiceActual + 1);
+      } else if (e.key === 'Escape') {
+        lightbox.style.display = 'none';
+      }
     }
   });
 </script>
