@@ -42,7 +42,7 @@ header p {
 /* === Navbar === */
 .navbar {
   background-color: #242323;
-  padding: 1rem 0.5rem; /* Ajuste opcional para mejor visual en mobile */
+  padding: 1rem 0.5rem;
   position: sticky;
   top: 0;
   z-index: 999;
@@ -51,9 +51,9 @@ header p {
 .nav-links {
   list-style: none;
   display: flex;
-  flex-direction: row; /* Siempre horizontal */
+  flex-direction: row;
   justify-content: center;
-  flex-wrap: wrap; /* Para evitar desbordes en pantallas pequeñas */
+  flex-wrap: wrap;
   gap: 1rem;
   text-align: center;
 }
@@ -74,8 +74,6 @@ header p {
   font-weight: 600;
 }
 
-/* Ya no es necesario este media query para el navbar,
-   pero podés dejarlo si querés hacer otros ajustes para pantallas grandes */
 @media (min-width: 600px) {
   .nav-links a {
     font-size: 1.1rem;
@@ -123,7 +121,6 @@ header p {
   text-align: center;
 }
 
-/* Sobre mí responsive */
 @media (min-width: 768px) {
   .sobre-mi {
     flex-direction: row;
@@ -171,9 +168,18 @@ header p {
   }
 }
 
-/*galeria horizontal*/
-.photo.horizontal {
-  grid-column: span 2;
+/* === Fotos horizontales ocupan 2 columnas solo en tablets/desktops === */
+@media (min-width: 600px) {
+  .photo.horizontal {
+    grid-column: span 2;
+  }
+}
+
+/* En móviles, las fotos horizontales ocupan 1 columna (para que no desaparezcan) */
+@media (max-width: 599px) {
+  .photo.horizontal {
+    grid-column: span 1;
+  }
 }
 
 /* === Formulario Contacto === */
@@ -284,7 +290,7 @@ footer {
   margin-top: auto;
 }
 
-/* === Lightbox (si lo usas) === */
+/* === Lightbox === */
 .lightbox {
   display: none;
   position: fixed;
@@ -315,14 +321,7 @@ footer {
   font-weight: bold;
 }
 
-/* === Responsive === */
-
-@media (min-width: 768px) {
-  .sobre-mi {
-    flex-direction: row;
-    text-align: left;
-  }
-}
+/* === Lightbox flechas === */
 .anterior,
 .siguiente {
   position: absolute;
