@@ -171,6 +171,11 @@ header p {
   }
 }
 
+/*galeria horizontal*/
+.photo.horizontal {
+  grid-column: span 2;
+}
+
 /* === Formulario Contacto === */
 form {
   display: flex;
