@@ -17,7 +17,7 @@ html, body {
   min-height: 100vh;
 }
 
-/* === Header (uniforme para todas las páginas) === */
+/* === Header === */
 header {
   background-color: #242323;
   color: #ece5e5;
@@ -30,12 +30,6 @@ header h1 {
   font-size: 2rem;
   margin-bottom: 0.3rem;
   font-weight: 600;
-  color: #ece5e5;
-}
-
-header p {
-  font-size: 1rem;
-  font-weight: 400;
   color: #ece5e5;
 }
 
@@ -72,13 +66,6 @@ header p {
 .nav-links a.active {
   background-color: #444;
   font-weight: 600;
-}
-
-@media (min-width: 600px) {
-  .nav-links a {
-    font-size: 1.1rem;
-    padding: 0.5rem 1rem;
-  }
 }
 
 /* === Contenedor principal === */
@@ -168,20 +155,78 @@ header p {
   }
 }
 
-/* === Fotos horizontales ocupan 2 columnas solo en tablets/desktops === */
+/* Fotos horizontales */
 @media (min-width: 600px) {
   .photo.horizontal {
     grid-column: span 2;
   }
 }
 
-/* En móviles, las fotos horizontales ocupan 1 columna (para que no desaparezcan) */
 @media (max-width: 599px) {
   .photo.horizontal {
     grid-column: span 1;
   }
 }
 
+/* === Footer === */
+footer {
+  background-color: #222;
+  color: #aaa;
+  text-align: center;
+  padding: 1.5rem 1rem;
+  font-size: 0.85rem;
+  border-top: 2px solid #444;
+  font-weight: 400;
+  margin-top: auto;
+}
+
+/* === Lightbox === */
+.lightbox {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.9);
+  justify-content: center;
+  align-items: center;
+}
+
+.lightbox-img {
+  max-width: 90%;
+  max-height: 80%;
+  border-radius: 8px;
+  box-shadow: 0 0 20px #000;
+}
+
+.cerrar {
+  position: absolute;
+  top: 30px;
+  right: 40px;
+  color: #c9b9b9;
+  font-size: 2rem;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* === Zonas invisibles de navegación === */
+.lightbox-zona {
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.lightbox-zona.izquierda {
+  left: 0;
+}
+
+.lightbox-zona.derecha {
+  right: 0;
+}
 /* === Formulario Contacto === */
 form {
   display: flex;
@@ -278,72 +323,3 @@ button[type="submit"]:hover {
   opacity: 0.85;
 }
 
-/* === Footer === */
-footer {
-  background-color: #222;
-  color: #aaa;
-  text-align: center;
-  padding: 1.5rem 1rem;
-  font-size: 0.85rem;
-  border-top: 2px solid #444;
-  font-weight: 400;
-  margin-top: auto;
-}
-
-/* === Lightbox === */
-.lightbox {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.9);
-  justify-content: center;
-  align-items: center;
-}
-
-.lightbox-img {
-  max-width: 90%;
-  max-height: 80%;
-  border-radius: 8px;
-  box-shadow: 0 0 20px #000;
-}
-
-.cerrar {
-  position: absolute;
-  top: 30px;
-  right: 40px;
-  color: #c9b9b9;
-  font-size: 2rem;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-/* === Lightbox flechas === */
-.anterior,
-.siguiente {
-  position: absolute;
-  top: 50%;
-  color: #ffffff;
-  font-size: 3rem;
-  font-weight: bold;
-  cursor: pointer;
-  user-select: none;
-  transform: translateY(-50%);
-  padding: 0 1rem;
-}
-
-.anterior {
-  left: 20px;
-}
-
-.siguiente {
-  right: 20px;
-}
-
-.anterior:hover,
-.siguiente:hover {
-  color: #ccc;
-}
